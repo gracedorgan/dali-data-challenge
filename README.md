@@ -1,0 +1,2 @@
+#Dali Data Challenge
+###Used data given to me by DALI lab to create an interactive bar chart of alcoholic drinks consumed per week vs. self-reported happiness with d3.js. This is really just a bar graph on a blank page. Enjoy.

@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script type="text/javascript" src="d3/d3.min.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div id='container'>
+    <svg></svg>
+  </div>
+</body>
+<script>
+  const mydata = [
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 63,
+      "happiness": 4,
+      "stressed": 2,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 4,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Male",
+      "heightInches": 71,
+      "happiness": 4,
+      "stressed": 5,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 8,
+      "caffeineRating": 6,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 4,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 63,
+      "happiness": 4,
+      "stressed": 4,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 2,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 0,
+      "hoursOnScreen": 9,
+      "phoneType": "Other"
+    },
+    {
+      "year": "'19",
+      "gender": "Male",
+      "heightInches": 70,
+      "happiness": 4,
+      "stressed": 5,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 7,
+      "caffeineRating": 8,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 7,
+      "phoneType": "Android"
+    },
+    {
+      "year": "'19",
+      "gender": "Male",
+      "heightInches": 70,
+      "happiness": 4,
+      "stressed": 8,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 3,
+      "caffeineRating": 3,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 5,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 63,
+      "happiness": 4,
+      "stressed": 3,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 14,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 13,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 65,
+      "happiness": 4,
+      "stressed": 6,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": 1,
+      "caffeineRating": 9,
+      "affiliated": 0,
+      "numOfLanguages": 4,
+      "gymPerWeek": 4,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 64,
+      "happiness": 4,
+      "stressed": 4,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 12,
+      "caffeineRating": 8,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 6,
+      "hoursOnScreen": 4,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 64,
+      "happiness": 2,
+      "stressed": 9,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 1,
+      "caffeineRating": 3,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 7,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 67,
+      "happiness": 3,
+      "stressed": 6,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 5,
+      "caffeineRating": 5,
+      "affiliated": 0,
+      "numOfLanguages": 3,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Male",
+      "heightInches": 71,
+      "happiness": 4,
+      "stressed": 5,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 1,
+      "alcoholDrinksPerWeek": 1,
+      "caffeineRating": 4,
+      "affiliated": 0,
+      "numOfLanguages": 3,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Male",
+      "heightInches": 65,
+      "happiness": 4,
+      "stressed": 8,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 1,
+      "caffeineRating": 3,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 5,
+      "hoursOnScreen": 12,
+      "phoneType": "Android"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 68,
+      "happiness": 5,
+      "stressed": 6,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 3,
+      "caffeineRating": 1,
+      "affiliated": 0,
+      "numOfLanguages": 1,
+      "gymPerWeek": 4,
+      "hoursOnScreen": 6,
+      "phoneType": "Android"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 65,
+      "happiness": 4,
+      "stressed": 9,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": 0,
+      "caffeineRating": 4,
+      "affiliated": 0,
+      "numOfLanguages": 1,
+      "gymPerWeek": 7,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Male",
+      "heightInches": 65,
+      "happiness": 5,
+      "stressed": 1,
+      "sleepPerNight": 4,
+      "socialDinnerPerWeek": 0,
+      "alcoholDrinksPerWeek": 0,
+      "caffeineRating": 10,
+      "affiliated": 0,
+      "numOfLanguages": 1,
+      "gymPerWeek": 7,
+      "hoursOnScreen": 15,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Male",
+      "heightInches": 72,
+      "happiness": 3,
+      "stressed": 7,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 10,
+      "caffeineRating": 6,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 6,
+      "hoursOnScreen": 5,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 66,
+      "happiness": 3,
+      "stressed": 6,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 2,
+      "caffeineRating": 6,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 7,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 65,
+      "happiness": 4,
+      "stressed": 7,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": 5,
+      "caffeineRating": 8,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 0,
+      "hoursOnScreen": 7,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 65,
+      "happiness": 5,
+      "stressed": 3,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 8,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 5,
+      "hoursOnScreen": 6,
+      "phoneType": "Android"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 71,
+      "happiness": 5,
+      "stressed": 2,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 3,
+      "caffeineRating": 2,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 64,
+      "happiness": 4,
+      "stressed": 7,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 3,
+      "caffeineRating": 2,
+      "affiliated": 1,
+      "numOfLanguages": 3,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Female",
+      "heightInches": 67,
+      "happiness": 5,
+      "stressed": 2,
+      "sleepPerNight": 9,
+      "socialDinnerPerWeek": 5,
+      "alcoholDrinksPerWeek": 2,
+      "caffeineRating": 5,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'19",
+      "gender": "Male",
+      "heightInches": 71,
+      "happiness": 5,
+      "stressed": 5,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 5,
+      "alcoholDrinksPerWeek": 2,
+      "caffeineRating": 6,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 10,
+      "phoneType": "Android"
+    },
+    {
+      "year": "'19",
+      "gender": "Male",
+      "heightInches": 64,
+      "happiness": 4,
+      "stressed": 4,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 6,
+      "caffeineRating": 3,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Male",
+      "heightInches": 69,
+      "happiness": 4,
+      "stressed": 2,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 3,
+      "caffeineRating": 3,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 6,
+      "hoursOnScreen": 10,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 65,
+      "happiness": 4,
+      "stressed": 6,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": null,
+      "alcoholDrinksPerWeek": null,
+      "caffeineRating": 2,
+      "affiliated": 0,
+      "numOfLanguages": 3,
+      "gymPerWeek": 4,
+      "hoursOnScreen": null,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Other",
+      "heightInches": 61,
+      "happiness": 3,
+      "stressed": 6,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 5,
+      "alcoholDrinksPerWeek": 2,
+      "caffeineRating": 1,
+      "affiliated": 0,
+      "numOfLanguages": 1,
+      "gymPerWeek": 1,
+      "hoursOnScreen": 7,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 64,
+      "happiness": 4,
+      "stressed": 8,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 0,
+      "caffeineRating": 3,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Male",
+      "heightInches": 70,
+      "happiness": 4,
+      "stressed": 3,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": 1,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 4,
+      "gymPerWeek": 1,
+      "hoursOnScreen": 8,
+      "phoneType": "Android"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 68,
+      "happiness": 5,
+      "stressed": 8,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 7,
+      "caffeineRating": 8,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 3,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 67,
+      "happiness": 4,
+      "stressed": 3,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 6,
+      "alcoholDrinksPerWeek": 5,
+      "caffeineRating": 8,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 5,
+      "hoursOnScreen": 12,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Male",
+      "heightInches": 67,
+      "happiness": 4,
+      "stressed": 6,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 6,
+      "caffeineRating": 1,
+      "affiliated": 0,
+      "numOfLanguages": 1,
+      "gymPerWeek": 5,
+      "hoursOnScreen": 3,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 65,
+      "happiness": 3,
+      "stressed": 10,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 10,
+      "caffeineRating": 2,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 6,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Male",
+      "heightInches": null,
+      "happiness": 4,
+      "stressed": 7,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 1,
+      "caffeineRating": 2,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 1,
+      "hoursOnScreen": 7,
+      "phoneType": "Android"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 62,
+      "happiness": 4,
+      "stressed": 5,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 2,
+      "caffeineRating": 4,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 4,
+      "hoursOnScreen": 5,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 64,
+      "happiness": 4,
+      "stressed": 6,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 3,
+      "caffeineRating": 5,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 7,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 66,
+      "happiness": 4,
+      "stressed": 3,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 4,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 3,
+      "gymPerWeek": 5,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 65,
+      "happiness": 3,
+      "stressed": 6,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 8,
+      "caffeineRating": 3,
+      "affiliated": 1,
+      "numOfLanguages": 3,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 65,
+      "happiness": 2,
+      "stressed": 6,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": 5,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 1,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 68,
+      "happiness": 4,
+      "stressed": 6,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 6,
+      "alcoholDrinksPerWeek": 8,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 0,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 62,
+      "happiness": 4,
+      "stressed": 7,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 0,
+      "caffeineRating": 2,
+      "affiliated": 0,
+      "numOfLanguages": 3,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 3,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 68,
+      "happiness": 4,
+      "stressed": 4,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": 1,
+      "caffeineRating": 1,
+      "affiliated": 0,
+      "numOfLanguages": 3,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 68,
+      "happiness": 4,
+      "stressed": 7,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 1,
+      "alcoholDrinksPerWeek": 1,
+      "caffeineRating": 3,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 1,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 67,
+      "happiness": 5,
+      "stressed": 4,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 5,
+      "alcoholDrinksPerWeek": 10,
+      "caffeineRating": 10,
+      "affiliated": 1,
+      "numOfLanguages": 4,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 7,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 62,
+      "happiness": 3,
+      "stressed": 7,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 4,
+      "alcoholDrinksPerWeek": 2,
+      "caffeineRating": 10,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 5,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Male",
+      "heightInches": 62,
+      "happiness": 4,
+      "stressed": 4,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 5,
+      "alcoholDrinksPerWeek": 4,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 5,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'20",
+      "gender": "Female",
+      "heightInches": 63,
+      "happiness": 4,
+      "stressed": 7,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 6,
+      "alcoholDrinksPerWeek": 10,
+      "caffeineRating": 7,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 7,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Male",
+      "heightInches": 67,
+      "happiness": 3,
+      "stressed": 2,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 1,
+      "alcoholDrinksPerWeek": 2,
+      "caffeineRating": 1,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 10,
+      "phoneType": "Android"
+    },
+    {
+      "year": "'21",
+      "gender": "Male",
+      "heightInches": 66,
+      "happiness": 5,
+      "stressed": 3,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": null,
+      "caffeineRating": 3,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": null,
+      "hoursOnScreen": 8,
+      "phoneType": "Android"
+    },
+    {
+      "year": "'21",
+      "gender": "Female",
+      "heightInches": 67,
+      "happiness": 5,
+      "stressed": 4,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 5,
+      "alcoholDrinksPerWeek": 5,
+      "caffeineRating": 6,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 5,
+      "hoursOnScreen": 5,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Male",
+      "heightInches": 67,
+      "happiness": 4,
+      "stressed": 2,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 0,
+      "caffeineRating": 10,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 12,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Female",
+      "heightInches": 67,
+      "happiness": 3,
+      "stressed": 3,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 6,
+      "alcoholDrinksPerWeek": 7,
+      "caffeineRating": 4,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 10,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Male",
+      "heightInches": 65,
+      "happiness": 5,
+      "stressed": 3,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 1,
+      "alcoholDrinksPerWeek": 0,
+      "caffeineRating": 1,
+      "affiliated": 0,
+      "numOfLanguages": 1,
+      "gymPerWeek": 6,
+      "hoursOnScreen": 5,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Female",
+      "heightInches": 64,
+      "happiness": 4,
+      "stressed": 3,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 6,
+      "alcoholDrinksPerWeek": 0,
+      "caffeineRating": 4,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Female",
+      "heightInches": 62,
+      "happiness": 5,
+      "stressed": 8,
+      "sleepPerNight": 5,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 5,
+      "caffeineRating": 9,
+      "affiliated": 0,
+      "numOfLanguages": 3,
+      "gymPerWeek": 0,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Male",
+      "heightInches": 69,
+      "happiness": 4,
+      "stressed": 7,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 5,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 5,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Male",
+      "heightInches": 70,
+      "happiness": 3,
+      "stressed": 5,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 5,
+      "alcoholDrinksPerWeek": 6,
+      "caffeineRating": 4,
+      "affiliated": 0,
+      "numOfLanguages": 1,
+      "gymPerWeek": 0,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Male",
+      "heightInches": 70,
+      "happiness": 3,
+      "stressed": 8,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 15,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 1,
+      "gymPerWeek": 6,
+      "hoursOnScreen": 10,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'21",
+      "gender": "Male",
+      "heightInches": 67,
+      "happiness": 4,
+      "stressed": 7,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": 10,
+      "caffeineRating": 1,
+      "affiliated": 1,
+      "numOfLanguages": 2,
+      "gymPerWeek": 5,
+      "hoursOnScreen": 9,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'22",
+      "gender": "Male",
+      "heightInches": 69,
+      "happiness": 4,
+      "stressed": 6,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 5,
+      "caffeineRating": 1,
+      "affiliated": 0,
+      "numOfLanguages": 1,
+      "gymPerWeek": 0,
+      "hoursOnScreen": 4,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'22",
+      "gender": "Female",
+      "heightInches": 63,
+      "happiness": 4,
+      "stressed": 3,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 7,
+      "alcoholDrinksPerWeek": 4,
+      "caffeineRating": 8,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 6,
+      "hoursOnScreen": 6,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'22",
+      "gender": "Female",
+      "heightInches": 63,
+      "happiness": 3,
+      "stressed": 5,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": 1,
+      "caffeineRating": 5,
+      "affiliated": 0,
+      "numOfLanguages": 3,
+      "gymPerWeek": 0,
+      "hoursOnScreen": 8,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'22",
+      "gender": "Male",
+      "heightInches": 71,
+      "happiness": 4,
+      "stressed": 8,
+      "sleepPerNight": 7,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": 5,
+      "caffeineRating": 1,
+      "affiliated": 0,
+      "numOfLanguages": 1,
+      "gymPerWeek": 2,
+      "hoursOnScreen": 7,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'22",
+      "gender": "Female",
+      "heightInches": 63,
+      "happiness": 3,
+      "stressed": 7,
+      "sleepPerNight": 6,
+      "socialDinnerPerWeek": 3,
+      "alcoholDrinksPerWeek": 8,
+      "caffeineRating": 8,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 6,
+      "hoursOnScreen": 7,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'22",
+      "gender": "Female",
+      "heightInches": 63,
+      "happiness": 5,
+      "stressed": 7,
+      "sleepPerNight": 8,
+      "socialDinnerPerWeek": 5,
+      "alcoholDrinksPerWeek": 2,
+      "caffeineRating": 9,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 5,
+      "hoursOnScreen": 10,
+      "phoneType": "iOS"
+    },
+    {
+      "year": "'22",
+      "gender": "Male",
+      "heightInches": 70,
+      "happiness": 4,
+      "stressed": 6,
+      "sleepPerNight": 5,
+      "socialDinnerPerWeek": 2,
+      "alcoholDrinksPerWeek": null,
+      "caffeineRating": 10,
+      "affiliated": 0,
+      "numOfLanguages": 2,
+      "gymPerWeek": 3,
+      "hoursOnScreen": 10,
+      "phoneType": "iOS"
+    }
+  ];
+
+
+
+  const margin = 60;
+  const width = 1000 - 2 * margin;
+  const height = 600 - 2 * margin;
+
+  const svg = d3.select('svg');
+  const chart = svg.append('g')
+    .attr('transform', `translate(${margin}, ${margin})`);
+  //yaxis
+  const yScale = d3.scaleLinear()
+    .range([height, 0])
+    .domain([0, 5]);
+  chart.append('g')
+    .call(d3.axisLeft(yScale));
+  //xaxis
+  const xScale = d3.scaleLinear()
+    .range([0, width])
+    .domain([0, 16])
+
+  chart.append('g')
+    .attr('transform', `translate(0, ${height})`)
+    .call(d3.axisBottom(xScale));
+  //drawing bars
+  // chart.selectAll()
+  //   .data(mydata)
+  //   .enter()
+  //   .append('rect')
+  //   .attr('x', (s) => xScale(s.alcoholDrinksPerWeek))
+  //   .attr('y', (s) => yScale(s.happiness))
+  //   .attr('height', (s) => height - yScale(s.happiness))
+  //   .attr('width', 30)
+  // chart.append('g')
+  //   .attr('class', 'grid')
+  //   .attr('transform', `translate(0, ${height})`)
+  //   .call(d3.axisBottom()
+  //     .scale(xScale)
+  //     .tickSize(-height, 0, 0)
+  //     .tickFormat(''))
+
+  // chart.append('g')
+  //   .attr('class', 'grid')
+  //   .call(d3.axisLeft()
+  //     .scale(yScale)
+  //     .tickSize(-width, 0, 0)
+  //     .tickFormat(''))
+
+  svg.append('text')
+    .attr('x', -(height / 2) - margin)
+    .attr('y', margin / 2.4)
+    .attr('transform', 'rotate(-90)')
+    .attr('text-anchor', 'middle')
+    .text('Self-reported happiness (out of 5)')
+
+  svg.append('text')
+    .attr('x', width / 2 + margin)
+    .attr('y', 40)
+    .attr('text-anchor', 'middle')
+    .text('No Correlation? Alcoholic Beverages Consumed vs. Happiness')
+  svg.append('text')
+    .attr('class', 'label')
+    .attr('x', width / 2 + margin)
+    .attr('y', height + margin * 1.7)
+    .attr('text-anchor', 'middle')
+    .text('Alcoholic Beverages Consumed per Week')
+  //interactivity
+
+  const barGroups = chart.selectAll()
+    .data(mydata)
+    .enter()
+    .append('g')
+
+  barGroups
+    .append('rect')
+    .attr('class', 'bar')
+    .attr('x', (g) => xScale(g.alcoholDrinksPerWeek))
+    .attr('y', (g) => yScale(g.happiness))
+    .attr('height', (g) => height - yScale(g.happiness))
+    .attr('width', 30)
+    .on('mouseenter', function (actual, i) {
+      d3.selectAll('.happiness')
+        .attr('opacity', 0)
+
+      d3.select(this)
+        .transition()
+        .duration(300)
+        .attr('opacity', 0.6)
+        .attr('x', (a) => xScale(a.alcoholDrinksPerWeek) - 5)
+        .attr('width', 30)
+
+      const y = yScale(actual.happiness)
+
+      line = chart.append('line')
+        .attr('id', 'limit')
+        .attr('x1', 0)
+        .attr('y1', y)
+        .attr('x2', width)
+        .attr('y2', y)
+
+      barGroups.append('text')
+        .attr('class', 'divergence')
+        .attr('x', (a) => xScale(a.alcoholDrinksPerWeek) + 10)
+        .attr('y', (a) => yScale(a.happiness) + 30)
+        .attr('fill', 'white')
+        .attr('text-anchor', 'middle')
+        .text((a, idx) => {
+          const divergence = (a.happiness - actual.happiness).toFixed(1)
+
+          let text = ''
+          if (divergence > 0) text += '+'
+          text += `${divergence}%`
+
+          return idx !== i ? text : '';
+        })
+
+    })
+    .on('mouseleave', function () {
+      d3.selectAll('.happiness')
+        .attr('opacity', 1)
+
+      d3.select(this)
+        .transition()
+        .duration(300)
+        .attr('opacity', 1)
+        .attr('x', (a) => xScale(a.alcoholDrinksPerWeek))
+        .attr('width', 30)
+
+      chart.selectAll('#limit').remove()
+      chart.selectAll('.divergence').remove()
+    })
+
+</script>
+
+</html>
